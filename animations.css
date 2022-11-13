@@ -1,0 +1,227 @@
+
+
+
+
+#logo path:nth-child(1){
+    stroke-dasharray: 1678;
+    stroke-dashoffset: 1678;
+    animation: line-anim 1s ease forwards, fix-stroke 0.5s ease forwards 2.5s;
+}
+
+#logo path:nth-child(2){
+    stroke-dasharray: 1954;
+    stroke-dashoffset: 1954;
+    animation: line-anim 1s ease forwards 0.3s, fix-stroke 0.5s ease forwards 2.5s;
+    
+}
+#logo path:nth-child(3){
+    stroke-dasharray: 1567;
+    stroke-dashoffset: 1567;
+    animation: line-anim 1s ease forwards 0.6s, fix-stroke 0.5s ease forwards 2.5s;
+}
+#logo path:nth-child(4){
+    stroke-dasharray: 1027;
+    stroke-dashoffset: 1027;
+    animation: line-anim 1s ease forwards 0.9s, fix-stroke 0.5s ease forwards 2.5s;
+}
+
+#logo path:nth-child(5){
+    stroke-dasharray: 831;
+    stroke-dashoffset: 831;
+    animation: line-anim 1s ease forwards 1.2s, fix-stroke 0.5s ease forwards 2.5s;
+}
+
+#logo{
+    animation: fill 0.5s ease forwards 2.5s;
+}
+
+@keyframes line-anim {
+    to{
+        stroke-dashoffset:0;
+    } 
+}
+
+@keyframes fix-stroke {
+    to{
+        stroke:transparent; 
+    } 
+}
+
+@keyframes fill{
+    from{
+        fill:transparent;
+    }
+    to{
+        fill: #00ce79;
+    } 
+}
+
+#navigation-bar {
+    animation: fade-in-menu 0.5s ease forwards 2.5s;
+}
+
+#scroll-down{
+    animation: fade-in-menu 0.5s ease forwards 2.5s, pulse 3s ease-out infinite 2.5s;
+}
+
+@keyframes liquid {
+    from {
+      bottom:100%;
+      transform:translateX(-50%) rotate(0deg);
+    }
+    to {
+      bottom:-50%;
+      transform:translateX(-50%) rotate(360deg);
+    }
+  }
+
+
+@keyframes fade-in-menu{
+    from{
+        transform: translateY(-50%);
+    }
+    to{
+        transform: translateY(0%);
+        opacity: 100%;
+    } 
+}
+
+
+@keyframes slideIn{
+    from{
+        transform: translateY(10%);
+        opacity: 0%;
+    }
+    to{
+        transform: translateY(0%);
+        opacity: 100%;
+    } 
+}
+
+@keyframes loadGuideLine{
+    to{
+        width: 50%;
+    } 
+}
+
+@keyframes marquee {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-50%, 0, 0);
+    }
+}
+
+@keyframes brighteningStar {
+    from{
+        opacity:0; 
+    } 
+    to{
+        opacity:1; 
+    } 
+}
+
+@keyframes fadingStar {
+    from{
+        opacity:1; 
+    } 
+    to{
+        opacity:0; 
+    } 
+}
+
+@keyframes loadLineLawaai {
+    to{
+        height: 15%;
+    } 
+}
+
+@keyframes loadLineMusic {
+    to{
+        height: 90%;
+    } 
+}
+
+@keyframes loadLine {
+    to{
+        height: 100%;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    } 
+}
+
+@keyframes cascadeBorderRadius {
+    from{
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    to{
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    } 
+}
+
+@keyframes toLight {
+    to{
+        background: #fff;
+    } 
+}
+
+@keyframes toDark {
+    to{
+        background: #0e0e0e;
+    } 
+}
+
+
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+      }
+    50% {
+        opacity: 1;
+      }
+    100% {
+    opacity: 0.5;
+    }
+}
+
+
+@keyframes OpeningSequence {
+    0% {
+      text-shadow: 0 0 50px #fff;
+      letter-spacing: 10px;
+      opacity: 0;
+      transform: rotateY(-90deg);
+    }
+    50% {
+      text-shadow: 0 0 1px #fff;
+      letter-spacing: 0px;
+      opacity: 0.8;
+      transform: rotateY(0deg);
+    }
+    100% {
+      text-shadow: 0 0 1px #fff;
+      opacity: 0.8;
+      transform: rotateY(0deg) translateZ(100px);
+    }
+  }
+
+  @keyframes fade-in-title{
+    0% {
+		opacity: 0;
+		text-shadow: 0 0 50px #fff;
+	}
+	100% {
+		opacity: 0.8;
+		text-shadow: 0 0 1px #fff;
+	}
+  }
+
+  
+@keyframes AnimateBG { 
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
