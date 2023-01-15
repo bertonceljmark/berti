@@ -1,11 +1,11 @@
-var stevecSlika = 0;
-var playing = false;
-var currentTrack = 0;
-var trackPlaying = "";
-var audio = "";
-var ran1 = 0;
+let stevecSlika = 0;
+let playing = false;
+let currentTrack = 0;
+let trackPlaying = "";
+let audio = "";
+let ran1 = 0;
 let index = 0;
-var discoFlag = 0;
+let discoFlag = 0;
 
 const toTop = document.querySelector(".to-top");
 
@@ -17,8 +17,8 @@ const aboutField = document.getElementById("container-about");
 const logo = document.querySelectorAll("#logo path");
 const playIcon = document.querySelectorAll(".part");
 const star = document.querySelectorAll("#disco-ball .star");
-var tracks = document.querySelectorAll(".song-snippet");
-var players = [];
+let tracks = document.querySelectorAll(".song-snippet");
+let players = [];
 
 let discoBall = document.getElementById("disco-ball");
 let discoBallRect = discoBall.getBoundingClientRect();
@@ -79,7 +79,7 @@ const youtubeVideo = document.getElementById("latest-video");
 const setupSvg = document.getElementById("setup-svg");
 const setupComp = document.querySelectorAll("svg g.setup");
 const setupTxt = document.querySelectorAll(".svg-txt");
-var tooltipBox;
+let tooltipBox;
 
 function init() {
   $(".js-input").keyup(function () {
@@ -117,7 +117,7 @@ function init() {
 } */
 
 /* function hideTooltip() {
-  var tooltip = document.getElementById("tooltip");
+  let tooltip = document.getElementById("tooltip");
   tooltip.style.display = "none";
 } */
 
@@ -137,8 +137,8 @@ function getData() {
   let dateNow = new Date();
   dateNow.setDate(dateNow.getDate() - 7);
   if (
-    (storedVideoCount && storedSubscriberCount && storedViewCount) ||
-    dateNow.getTime() > dateSaved
+    (!!storedVideoCount && !!storedSubscriberCount && !!storedViewCount) ||
+    (!!dateSaved && dateNow.getTime() > dateSaved)
   ) {
     videoCount.innerText = +storedVideoCount;
     viewCount.innerText = Math.round(storedViewCount / 10000) / 100 + " m";
@@ -147,7 +147,6 @@ function getData() {
     return;
   }
 
-  console.log(localStorage);
   fetch(
     "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" +
       youtubeUser +
@@ -234,27 +233,6 @@ function blinkingStars() {
 function scrollEvents() {
   closeMenu();
   let scrollPosition = window.scrollY + (window.innerHeight * 3) / 4;
-  let percentageMusic = scale(
-    scrollPosition,
-    getTop(containerMusic),
-    getBot(containerMusic),
-    0,
-    100
-  );
-  let percentageEvents = scale(
-    scrollPosition,
-    getTop(containerEvents),
-    getBot(containerEvents),
-    0,
-    100
-  );
-  let percentageLawaai = scale(
-    scrollPosition,
-    getTop(containerLawaai),
-    getBot(containerLawaai),
-    0,
-    100
-  );
 
   if (getTop(setupSvg) < scrollPosition) {
     for (let i = 0; i < setupComp.length; i++) {
@@ -268,13 +246,7 @@ function scrollEvents() {
     }
     youtubeVideo.classList.add("visible");
   }
-  /*
-    if(getTop(containerAbout) < scrollPosition - (window.innerHeight / 4)){
-        toTop.classList.add("active");
-    } else {
-        toTop.classList.remove("active");
-    }
-    */
+
   if (getTop(musicPlay) < scrollPosition) {
     guideLinePlay.classList.add("load-guide-line");
     textPlay.classList.add("visible");
@@ -310,9 +282,48 @@ function scrollEvents() {
 
     discoFlag = 1;
   } else if (discoFlag === 0) {
-    fillLine(lineMusic, percentageMusic);
-    fillLine(lineEvents, percentageEvents);
-    fillLine(lineLawaai, percentageLawaai);
+    if (
+      getTop(containerMusic) < scrollPosition &&
+      getBot(containerMusic) > scrollPosition
+    ) {
+      let percentageMusic = scale(
+        scrollPosition,
+        getTop(containerMusic),
+        getBot(containerMusic),
+        0,
+        100
+      );
+      fillLine(lineMusic, percentageMusic);
+    }
+
+    if (
+      getTop(containerEvents) < scrollPosition &&
+      getBot(containerEvents) > scrollPosition
+    ) {
+      let percentageEvents = scale(
+        scrollPosition,
+        getTop(containerEvents),
+        getBot(containerEvents),
+        0,
+        100
+      );
+
+      fillLine(lineEvents, percentageEvents);
+    }
+
+    if (
+      getTop(containerLawaai) < scrollPosition &&
+      getBot(containerLawaai) > scrollPosition
+    ) {
+      let percentageLawaai = scale(
+        scrollPosition,
+        getTop(containerLawaai),
+        getBot(containerLawaai),
+        0,
+        100
+      );
+      fillLine(lineLawaai, percentageLawaai);
+    }
   } else {
     lineEvents.classList.add("filled-line");
     lineLawaai.classList.add("filled-line-lawaai");
@@ -322,7 +333,6 @@ function scrollEvents() {
 function fillLine(el, percentage) {
   if (percentage < 1) {
     el.style.height = "0%";
-  } else if (percentage > 99.5) {
   } else if (percentage < 99.5) {
     el.style.height = percentage + "%";
   }
@@ -367,8 +377,8 @@ function play() {
       ran1 = Math.floor(Math.random() * 5) + 1;
     }
 
-    var audioString = "audio" + ran1;
-    var audio = document.getElementById(audioString);
+    let audioString = "audio" + ran1;
+    let audio = document.getElementById(audioString);
     audio.play();
     trackPlaying = audio;
     currentTrack = ran1;
