@@ -129,6 +129,25 @@ function unlock() {
 }
 
 function getData() {
+  let storedVideoCount = localStorage.getItem("videoCount");
+  let storedSubscriberCount = localStorage.getItem("subscriberCount");
+  let storedViewCount = localStorage.getItem("viewCount");
+  let dateSaved = localStorage.getItem("dateSaved");
+
+  let dateNow = new Date();
+  dateNow.setDate(dateNow.getDate() - 7);
+  if (
+    (storedVideoCount && storedSubscriberCount && storedViewCount) ||
+    dateNow.getTime() > dateSaved
+  ) {
+    videoCount.innerText = +storedVideoCount;
+    viewCount.innerText = Math.round(storedViewCount / 10000) / 100 + " m";
+    subscriberCount.innerText = storedSubscriberCount;
+
+    return;
+  }
+
+  console.log(localStorage);
   fetch(
     "https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" +
       youtubeUser +
@@ -144,10 +163,18 @@ function getData() {
         viewCount.innerText =
           Math.round(data.items[0].statistics.viewCount / 10000) / 100 + " m";
         subscriberCount.innerText = data.items[0].statistics.subscriberCount;
+
+        localStorage.setItem("videoCount", data.items[0].statistics.videoCount);
+        localStorage.setItem("viewCount", data.items[0].statistics.viewCount);
+        localStorage.setItem(
+          "subscriberCount",
+          data.items[0].statistics.subscriberCount
+        );
+        localStorage.setItem("dateSaved", Date.now());
       } catch (error) {
-        videoCount.innerText = 25;
-        viewCount.innerText = "1.4 m";
-        subscriberCount.innerText = 5220;
+        videoCount.innerText = "> 25";
+        viewCount.innerText = "> 1.4 m";
+        subscriberCount.innerText = "> 5220";
       }
     });
 }
@@ -178,7 +205,6 @@ function getLatestVideo() {
 function centerMenu() {
   if (menuMobileCheckbox.checked == true) {
     menuMobile.classList.add("move-center");
-    console.log("clicked");
   } else {
     menuMobile.classList.remove("move-center");
   }
